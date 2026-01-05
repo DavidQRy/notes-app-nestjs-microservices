@@ -1,0 +1,2 @@
+npm install @nestjs/core @nestjs/common @nestjs/microservices class-validator class-transformer joi reflect-metadata rxjs
+
