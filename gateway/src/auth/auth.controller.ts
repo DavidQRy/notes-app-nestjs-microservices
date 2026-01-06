@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { AuthGuard } from './auth.guard';
 
 
 @Controller('auth')
@@ -17,7 +18,8 @@ export class AuthController {
     return loginUserDto
   }
 
-  @Get()
+   @UseGuards(AuthGuard)
+  @Get('verify')
   varify() {
     return "...varifing";
   }
