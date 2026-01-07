@@ -1,13 +1,13 @@
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
-import { enviromentsVars } from "src/config";
+import { enviromentsVars, NATS_SERVICE } from "src/config";
 
 
 @Module({
     imports: [
         ClientsModule.register([
             {
-                name: "NATS_SERVICE",
+                name: NATS_SERVICE,
                 transport: Transport.NATS,
                 options: {
                     servers: enviromentsVars.natsServer
@@ -18,7 +18,7 @@ import { enviromentsVars } from "src/config";
     exports: [
         ClientsModule.register([
             {
-                name: "NATS_SERVICE",
+                name: NATS_SERVICE,
                 transport: Transport.NATS,
                 options: {
                     servers: enviromentsVars.natsServer
@@ -28,6 +28,6 @@ import { enviromentsVars } from "src/config";
     ]
 })
 
-export class NNatsModule {
+export class NatsModule {
 
 }
