@@ -3,7 +3,10 @@ import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthGuard } from './auth.guard';
 import { NATS_SERVICE } from 'src/config';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { catchError } from 'rxjs';
+import { error } from 'console';
+import { User } from './decorators/user.decorator';
 
 
 @Controller('auth')
@@ -12,18 +15,28 @@ export class AuthController {
 
   @Post('register')
   register(@Body() registerUserDto: RegisterUserDto) {
-    return this.client.send('auth.register', registerUserDto);
+    return this.client.send('auth.register', registerUserDto)
+    .pipe(
+      catchError(error => {
+        throw new RpcException(error)
+      })
+    )
   }
 
   @Post('login')
   login(@Body() loginUserDto: LoginUserDto){
     return this.client.send('auth.login', loginUserDto)
+    .pipe(
+      catchError(error => {
+        throw new RpcException(error)
+      })
+    )
   }
 
    @UseGuards(AuthGuard)
   @Get('verify')
-  varify() {
-    return "...varifing";
+  varify(@User() user: {token: string}) {
+    return user;
   }
 
 }

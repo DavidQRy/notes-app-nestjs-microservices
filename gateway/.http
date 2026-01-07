@@ -16,3 +16,7 @@ Content-Type: application/json
     "email": "David1@email.com",
     "password": "123456d"
 }
+### Verify
+GET  http://localhost:3000/api/auth/verify
+Content-Type: application/json
+Authorization: Bearer asdfasdsadas
