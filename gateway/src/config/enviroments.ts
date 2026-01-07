@@ -1,4 +1,3 @@
-import { ifError } from 'assert';
 import 'dotenv/config';
 import * as joi from 'joi';
 
