@@ -1,2 +1,2 @@
-export * from './enviroments'
-export * from './service'
+export * from './enviroments';
+export * from './service';
