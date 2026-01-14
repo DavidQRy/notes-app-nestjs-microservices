@@ -35,7 +35,7 @@ export class AuthController {
 
    @UseGuards(AuthGuard)
   @Get('verify')
-  varify(@User() user: {token: string}) {
+  varify(@User() user: {id: string, name: string, email: string}) {
     return user;
   }
 

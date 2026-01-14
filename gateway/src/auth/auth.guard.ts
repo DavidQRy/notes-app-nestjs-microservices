@@ -1,9 +1,14 @@
-import { CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Inject, UnauthorizedException } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { Request } from "express";
-import { Observable } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
+import { NATS_SERVICE } from 'src/config';
 
 export class AuthGuard implements CanActivate {
-    canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+
+    constructor(@Inject(NATS_SERVICE) private readonly client: ClientProxy){}
+
+    async canActivate(context: ExecutionContext) {
         const request = context.switchToHttp().getRequest();
         const token = this.tokenExtractor(request)
         if (!token) {
@@ -11,7 +16,11 @@ export class AuthGuard implements CanActivate {
         }
 
         try {
-            request.user = { token }
+            const {user, token:  newToken} = await firstValueFrom(
+                this.client.send('verify.token', token)
+            )
+            request.user = user
+            request.token =  newToken 
             return true
         } catch (error) {
             console.log(error)

@@ -25,5 +25,5 @@ const enviromentsVars: EnviromentsVars = value;
 
 export const enviroments = {
   natsServer: enviromentsVars.NATS_SERVER,
-  SECRET: enviromentsVars.JWT_SECRET,
+  jwtSecret: enviromentsVars.JWT_SECRET,
 };
