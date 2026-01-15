@@ -1,16 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { IJwtPayload } from './interfaces/jwt-payload.interface';
 import { JwtService } from '@nestjs/jwt';
 import { enviroments } from 'src/config';
 import { RpcException } from '@nestjs/microservices';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class AuthService {
+export class AuthService extends PrismaClient implements OnModuleInit {
 
   constructor(private readonly jwtService: JwtService){
+    super()
+  }
 
+  async onModuleInit() {
+      await this.$connect()
   }
 
   async register(registerUserDto: RegisterUserDto){
