@@ -24,13 +24,13 @@ export class AuthService extends PrismaClient implements OnModuleInit {
   }
 
   async register(registerUserDto: RegisterUserDto){
-    const exist = this.user.findUnique({
+    const exist = await this.user.findUnique({
       where: {
         email: registerUserDto.email
       }
     })
 
-    if (!exist) {
+    if (exist) {
       throw new RpcException({
         status: 400,
         message: `${registerUserDto.email} is already registered`
