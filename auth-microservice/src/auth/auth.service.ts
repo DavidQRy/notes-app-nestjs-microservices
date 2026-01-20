@@ -7,6 +7,8 @@ import { enviroments } from 'src/config';
 import { RpcException } from '@nestjs/microservices';
 import { PrismaClient } from 'generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg'
+import bcypt from "bcrypt";
+
 @Injectable()
 export class AuthService extends PrismaClient implements OnModuleInit {
   
@@ -22,7 +24,27 @@ export class AuthService extends PrismaClient implements OnModuleInit {
   }
 
   async register(registerUserDto: RegisterUserDto){
-    return { registerUserDto }
+    const exist = this.user.findUnique({
+      where: {
+        email: registerUserDto.email
+      }
+    })
+
+    if (!exist) {
+      throw new RpcException({
+        status: 400,
+        message: `${registerUserDto.email} is already registered`
+      })
+    }
+
+    const newUser = await this.user.create({
+      data:{
+        ...registerUserDto,
+        password: bcypt.hashSync(registerUserDto.password, 10)
+      }
+    })
+
+    return newUser
   }
 
   async login(loginUserDto: LoginUserDto){
