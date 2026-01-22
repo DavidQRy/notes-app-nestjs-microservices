@@ -19,4 +19,4 @@ Content-Type: application/json
 ### Verify
 GET  http://localhost:3000/api/auth/verify
 Content-Type: application/json
-Authorization: Bearer asdfasdsadas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4OTliOWM2LTlmYWEtNDJkMS05MTUxLWE5YTZhYzM0MGI4ZiIsIm5hbWUiOiJEYXZpZCIsImVtYWlsIjoiRGF2aWQxQGVtYWlsLmNvbSIsImlhdCI6MTc2OTA0ODU1MCwiZXhwIjoxNzY5MDUyMTUwfQ.3Wt6Vq7_FcxMQR7gxz-VX7BIMTW7I-GW7Va-Evx5aoo
