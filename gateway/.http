@@ -20,3 +20,18 @@ Content-Type: application/json
 GET  http://localhost:3000/api/auth/verify
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4OTliOWM2LTlmYWEtNDJkMS05MTUxLWE5YTZhYzM0MGI4ZiIsIm5hbWUiOiJEYXZpZCIsImVtYWlsIjoiRGF2aWQxQGVtYWlsLmNvbSIsImlhdCI6MTc2OTA0ODU1MCwiZXhwIjoxNzY5MDUyMTUwfQ.3Wt6Vq7_FcxMQR7gxz-VX7BIMTW7I-GW7Va-Evx5aoo
+
+### Crear nota
+POST http://localhost:3000/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4OTliOWM2LTlmYWEtNDJkMS05MTUxLWE5YTZhYzM0MGI4ZiIsIm5hbWUiOiJEYXZpZCIsImVtYWlsIjoiRGF2aWQxQGVtYWlsLmNvbSIsImlhdCI6MTc2OTEzOTc0MywiZXhwIjoxNzY5MTQzMzQzfQ.YYtXG5ZEIA2mjLU4J_zP3hm3ReyDMTLa6Ji8k0W3jLQ
+
+{
+    "title": "Learn microservices",
+    "content": "learn microservices with nestjs"
+}
+
+### find all notes for user
+GET  http://localhost:3000/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4OTliOWM2LTlmYWEtNDJkMS05MTUxLWE5YTZhYzM0MGI4ZiIsIm5hbWUiOiJEYXZpZCIsImVtYWlsIjoiRGF2aWQxQGVtYWlsLmNvbSIsImlhdCI6MTc2OTEzOTk5MywiZXhwIjoxNzY5MTQzNTkzfQ.8GM1gyaOCut1u4yySmjCNqEs_MrgA2cFG6hGUpSlZUw
